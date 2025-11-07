@@ -1,0 +1,368 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* 屏幕管理 */
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* 启动页面样式 */
+#startScreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+}
+
+.animated-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #1e3c72, #2a5298, #7e22ce, #c026d3);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    filter: blur(80px);
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.start-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: white;
+}
+
+.game-title {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    animation: titleBlink 2s ease-in-out infinite;
+}
+
+@keyframes titleBlink {
+    0%, 100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+    50% { text-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.6); }
+}
+
+.start-button {
+    padding: 1rem 3rem;
+    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.start-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+.footer {
+    margin-top: 3rem;
+}
+
+.footer a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: white;
+}
+
+/* 游戏主界面 */
+#gameScreen {
+    background: #000;
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1920px;
+    max-height: 1080px;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
+}
+
+.background-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 0.5s ease;
+}
+
+.character-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.character {
+    position: absolute;
+    bottom: 0;
+    height: 80%;
+    transition: all 0.5s ease, opacity 0.3s ease;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+}
+
+/* 对话框 */
+.dialog-box {
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    right: 5%;
+    background: rgba(0, 0, 0, 0.85);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+.character-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #ffd700;
+}
+
+.dialog-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    min-height: 4rem;
+    white-space: pre-line;
+}
+
+.continue-indicator {
+    position: absolute;
+    right: 2rem;
+    bottom: 1rem;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* 选项容器 */
+.choice-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 80%;
+    max-width: 600px;
+}
+
+.choice-container.hidden {
+    display: none;
+}
+
+.choice-button {
+    padding: 1.5rem;
+    background: rgba(30, 60, 114, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: slideInChoice 0.5s ease forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes slideInChoice {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.choice-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.choice-button:hover::before {
+    left: 100%;
+}
+
+.choice-button:hover {
+    background: rgba(42, 82, 152, 0.9);
+    border-color: white;
+    transform: translateX(10px);
+    box-shadow: 0 5px 20px rgba(42, 82, 152, 0.5);
+}
+
+/* 控制按钮 */
+.controls {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.controls button {
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.controls button:hover {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: white;
+}
+
+/* 音量控制 */
+.volume-control {
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.volume-control label {
+    color: white;
+    font-size: 1.2rem;
+}
+
+.volume-control input[type="range"] {
+    width: 100px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+.volume-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #32CD32;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.volume-control input[type="range"]::-webkit-slider-thumb:hover {
+    background: #98FB98;
+    transform: scale(1.2);
+}
+
+.volume-control input[type="range"]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: #32CD32;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.volume-control input[type="range"]::-moz-range-thumb:hover {
+    background: #98FB98;
+    transform: scale(1.2);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .game-title {
+        font-size: 2.5rem;
+    }
+
+    .start-button {
+        font-size: 1.2rem;
+        padding: 0.8rem 2rem;
+    }
+
+    .dialog-text {
+        font-size: 1rem;
+    }
+
+    .choice-button {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+}
+
+/* 竖屏旋转提示 */
+@media (orientation: portrait) and (max-width: 768px) {
+    body::before {
+        content: "请旋转设备以获得最佳体验";
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 2rem;
+        border-radius: 10px;
+        z-index: 9999;
+        text-align: center;
+    }
+}

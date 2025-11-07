@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>傲娇大小姐白菜 - 视觉小说游戏</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 启动页面 -->
+    <div id="startScreen" class="screen active">
+        <div class="animated-background"></div>
+        <div class="start-content">
+            <h1 class="game-title">傲娇大小姐白菜</h1>
+            <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem; font-size: 1.2rem;">贵族学园与平民少年的恋爱物语</p>
+            <button class="start-button" onclick="startGame()">点击开始</button>
+            <p style="color: rgba(255, 255, 255, 0.6); margin-top: 2rem; font-size: 0.9rem;">提示：游戏支持键盘空格键/回车键继续对话</p>
+            <div class="footer">
+                <a href="https://github.com" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 游戏主界面 -->
+    <div id="gameScreen" class="screen">
+        <div class="game-container">
+            <!-- 背景层 -->
+            <div id="background" class="background-layer"></div>
+
+            <!-- 角色层 -->
+            <div id="characters" class="character-layer"></div>
+
+            <!-- 对话框 -->
+            <div id="dialogBox" class="dialog-box">
+                <div class="character-name" id="characterName"></div>
+                <div class="dialog-text" id="dialogText"></div>
+                <div class="continue-indicator">▼</div>
+            </div>
+
+            <!-- 选项容器 -->
+            <div id="choiceContainer" class="choice-container hidden"></div>
+
+            <!-- 控制按钮 -->
+            <div class="controls">
+                <button onclick="autoPlay()" title="自动播放">AUTO</button>
+                <button onclick="skipDialog()" title="跳过">SKIP</button>
+                <button onclick="saveGame()" title="保存">SAVE</button>
+                <button onclick="loadGame()" title="加载">LOAD</button>
+                <button onclick="toggleMute()" id="muteButton" title="音乐开关">音乐</button>
+            </div>
+
+            <!-- 音量控制 -->
+            <div class="volume-control" id="volumeControl">
+                <label for="volumeSlider">音量</label>
+                <input type="range" id="volumeSlider" min="0" max="100" value="30" oninput="changeVolume(this.value)">
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
