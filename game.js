@@ -272,7 +272,7 @@ const gameScript = [
     // 7
     {
         title: 'Chapter 4 - night',
-        background: './images/bed.jpg',
+        background: './images/bed1.jpg',
         bgm: 'https://www.bensound.com/bensound-music/bensound-love.mp3',
         scenes: [
             {
