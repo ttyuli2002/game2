@@ -153,7 +153,7 @@ const gameScript = [
     {
         title: 'Chapter 2 - 饮料2',
         background: './images/drink1.jpg',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',
         scenes: [
             {
                 character: null,
@@ -169,7 +169,7 @@ const gameScript = [
     {
         title: 'Chapter 2 - 饮料3',
         background: './images/drink2.jpg',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',
         scenes: [
             {
                 character: null,
@@ -185,7 +185,7 @@ const gameScript = [
     {
         title: 'Chapter 3 - food',
         background: './images/foodScene.jpg',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-sweetday.mp3',
         scenes: [
             {
                 character: null,
@@ -235,7 +235,7 @@ const gameScript = [
     {
         title: 'Chapter 3 - food2',
         background: './images/food1.jpg',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-sweetday.mp3',
         scenes: [
             {
                 character: null,
@@ -251,7 +251,7 @@ const gameScript = [
     {
         title: 'Chapter 3 - food3',
         background: './images/food2.jpg',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-sweetday.mp3',
         scenes: [
             {
                 character: null,
@@ -273,7 +273,7 @@ const gameScript = [
     {
         title: 'Chapter 4 - night',
         background: './images/bed.jpg',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-love.mp3',
         scenes: [
             {
                 character: null,
@@ -295,7 +295,7 @@ const gameScript = [
     {
         title: 'Chapter 4 - night',
         background: './images/bedAngry.jpg',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-love.mp3',
         scenes: [
             {
                 character: null,
@@ -327,7 +327,7 @@ const gameScript = [
     {
         title: 'Chapter 4 - night1',
         background: './images/bedSmile1.jpg',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-romantic.mp3',
         scenes: [
             {
                 character: null,
@@ -350,7 +350,7 @@ const gameScript = [
     {
         title: 'Chapter 4 - night1',
         background: './images/bedSmile.jpg',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-romantic.mp3',
         scenes: [
             {
                 character: null,
@@ -373,7 +373,7 @@ const gameScript = [
     {
         title: 'Chapter 5',
         background: './images/cuteOnBed.jpg',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-romantic.mp3',
         scenes: [
             {
                 character: null,
