@@ -28,7 +28,7 @@ function generateCharacterPlaceholder(name, color) {
             <circle cx="185" cy="130" rx="8" ry="10" fill="#333"/>
             <circle cx="215" cy="130" rx="8" ry="10" fill="#333"/>
             <text x="200" y="750" font-size="52" fill="white" text-anchor="middle" font-weight="bold">${name}</text>
-            <text x="200" y="700" font-size="24" fill="white" text-anchor="middle" opacity="0.8">大小姐</text>
+            <text x="200" y="700" font-size="24" fill="white" text-anchor="middle" opacity="0.8">男友</text>
         </svg>
     `;
     return 'data:image/svg+xml;base64,' + btoa(encodeURIComponent(svg).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode('0x' + p1)));
@@ -38,1020 +38,351 @@ function generateCharacterPlaceholder(name, color) {
 const characters = {
     baicai: {
         name: '白菜',
-        image: generateCharacterPlaceholder('白菜', '#98FB98'),
+        image: './images/cabbage.png',
         color: '#32CD32'
     }
 };
 
+// 音效管理
+const soundEffects = {
+    first: './sounds/first.mp3', 
+    second: './sounds/second.mp3',
+    third:  './sounds/third.mp3',
+    forth: './sounds/forth.mp3', 
+    fifth: './sounds/fifth.mp3',
+    angry:  './sounds/angry.mp3',
+    annoyed: './sounds/annoyed.mp3',
+    bored: './sounds/bored.mp3',
+    enhen: './sounds/enhen.mp3',
+    car: './sounds/car-horn.mp3',
+    applause: './sounds/applause.mp3'
+};
+
+// 播放音效
+function playSoundEffect(effectName) {
+    if (soundEffects[effectName]) {
+        const audio = new Audio(soundEffects[effectName]);
+        audio.volume = 0.5;  // 音效音量50%
+        audio.play().catch(err => {
+            console.log(`音效播放失败: ${effectName}`, err);
+        });
+    } else {
+        console.log(`音效不存在: ${effectName}`);
+    }
+}
+
 // 完整的游戏剧本 - Galgame 风格
 const gameScript = [
-    // === Prologue ===
-    {
-        title: 'Prologue',
-        background: 'https://images.unsplash.com/photo-1562774053-701939374585?w=1920&q=80',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-memories.mp3',
-        scenes: [
-            {
-                character: null,
-                name: '',
-                text: '四月，樱花盛开的季节。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '我作为特别奖学金生，转入了这所传说中只有贵族子弟才能就读的——',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '圣光学园。',
-                position: 'center'
-            }
-        ]
-    },
-
-    // === Chapter 1: First Encounter ===
+    // 0
     {
         title: 'Chapter 1 - 命运的邂逅',
-        background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1920&q=80',
+        background: './images/inBed.jpg',
         bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
         scenes: [
             {
                 character: null,
-                name: '我',
-                text: '（走进教学楼）',
+                name: '',
+                text: '清晨，你睡醒了。',
                 position: 'center'
             },
             {
                 character: null,
-                name: '我',
-                text: '（环顾四周）',
-                position: 'center'
+                name: '白菜',
+                text: '早上好呀，我是你的虚拟傲娇男友。我叫白菜，请多多指教！',
+                position: 'center',
+                soundEffect: 'first'
+            },
+            {
+                character: null,
+                name: '白菜',
+                text: '你想要做什么我都会陪你的哦，我亲爱的小姐。',
+                position: 'center',
             },
             {
                 character: null,
                 name: '',
-                text: '大理石地面、水晶吊灯、油画装饰...',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '这、这里...真的是学校吗？',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '就在我呆站在走廊中央时——',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '？？？',
-                text: '喂！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '？？？',
-                text: '你挡路了！让开让开！',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '啊，抱歉！',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '我慌忙让到一旁。',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '？？？',
-                text: '哼！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '？？？',
-                text: '（仔细打量着我）',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '？？？',
-                text: '你...该不会就是那个用奖学金进来的平民学生吧？',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '是、是的...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '哼哼～果然！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '听好了！本小姐是白菜家族的千金——白菜！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '在这所学校里，白菜家族可是数一数二的名门哦！',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '（点头）我、我记住了...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '那就好！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '你可不要做什么奇怪的事给本小姐添麻烦哦？',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '说完，她扬起下巴，优雅地转身离去。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '只留下淡淡的香水味...和我凌乱的心情。',
-                position: 'center'
+                text: '你打算:',
+                position: 'center',
             }
         ],
         choices: [
             {
-                text: '（真是个任性的大小姐...）',
-                nextScene: 2
+                text: '外出',
+                nextScene: 1
             },
             {
-                text: '（虽然有点傲慢，但...还挺可爱的？）',
-                nextScene: 2
+                text: '继续呆在家里',
+                nextScene: 1
             }
         ]
     },
 
-    // === Chapter 2: Rainy Day ===
+    // 1
     {
-        title: 'Chapter 2 - 雨中的少女',
-        background: 'https://images.unsplash.com/photo-1428908728789-d2de25dbd4e2?w=1920&q=80',
+        title: 'Chapter 2 - 饮料1',
+        background: './images/drinkScene.jpg',
         bgm: 'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',
         scenes: [
             {
                 character: null,
                 name: '',
-                text: '——一周后',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '放学时分，天空突然下起了倾盆大雨。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '（站在校门口）唉...没带伞...',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '就在我犹豫要不要冲进雨中时——',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '我注意到校门旁的屋檐下，站着一个熟悉的身影。',
-                position: 'center'
+                text: '终于到镇上了，好渴啊！这里有一家商店欸',
+                position: 'center',
+                soundEffect: 'car'
             },
             {
                 character: characters.baicai.image,
-                name: '白菜',
-                text: '可恶...管家怎么还不来接我...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（焦急地看着手机）',
-                position: 'center'
-            },
-            {
-                character: null,
                 name: '',
-                text: '白菜似乎也被困在了这里。',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（注意到我的视线）',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '你、你看什么看！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '难道你想嘲笑本小姐被困在这里吗？！',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '不、不是...',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '我看着她微微发抖的肩膀。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '尽管嘴上说得很强硬，但她似乎有些害怕...',
-                position: 'center'
+                text: '你拿了一瓶冰红茶，奢华又带着低调。很适合你这样沉稳的有钱人。正打算付钱，你看到白菜正痴痴地望着冰柜里的冰露。你打算：',
+                soundEffect: 'second'
             }
         ],
         choices: [
             {
-                text: '【把外套递给她】那个...你先披上我的外套吧',
-                nextScene: 3
+                text: '【给白菜买一瓶饮料】',
+                nextScene: 2
             },
             {
-                text: '【默默离开】还是不要多管闲事了...',
-                nextScene: 7
+                text: '【不管白菜，自己买一瓶框框喝】',
+                nextScene: 2
             }
         ]
     },
 
-    // === Good Route: Chapter 3 ===
+    // 2
     {
-        title: 'Chapter 3 - 温柔的外套',
-        background: 'https://images.unsplash.com/photo-1428908728789-d2de25dbd4e2?w=1920&q=80',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-sweetday.mp3',
+        title: 'Chapter 2 - 饮料2',
+        background: './images/drink1.jpg',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
         scenes: [
             {
                 character: null,
-                name: '我',
-                text: '那个...白菜同学',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '虽然不能遮雨，但这件外套至少能挡挡风...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
                 name: '白菜',
-                text: '诶？',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '你、你...！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（脸颊泛红）什、什么啊！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '你以为本小姐会需要你这种平民的帮助吗？！',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '（准备收回外套）啊，抱歉，是我多管闲事了...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '等、等等！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（小声）我、我可没说不要...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '只、只是暂时借用一下而已！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '别想太多了！哼！',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '她接过外套，轻轻披在肩上。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '（微笑）没关系，能帮上忙就好。',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（把脸别向一边）',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '你、你这家伙...还真是个笨蛋呢...',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '虽然这么说着，但她的声音却意外地温柔。',
-                position: 'center'
+                text: '谁想要你给我买的饮料！不要擅作主张的给我买好吗！',
+                soundEffect: 'third'
             }
-        ]
+        ],
+        nextScene: 3
     },
 
-    // === Chapter 4: Lunch ===
+    // 3
     {
-        title: 'Chapter 4 - 特制便当',
-        background: 'https://images.unsplash.com/photo-1551218808-94e220e084d2?w=1920&q=80',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-buddy.mp3',
+        title: 'Chapter 2 - 饮料3',
+        background: './images/drink2.jpg',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
+        scenes: [
+            {
+                character: null,
+                name: '白菜',
+                text: '（脸颊泛红）作为你没礼貌的惩罚，这瓶饮料我就没收了哦。',
+                soundEffect: 'angry'
+            }
+        ],
+        nextScene: 4
+    },
+
+    // 4
+    {
+        title: 'Chapter 3 - food',
+        background: './images/foodScene.jpg',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',
         scenes: [
             {
                 character: null,
                 name: '',
-                text: '——第二天，午休时间',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '（打开便利店买的便当）',
-                position: 'center'
+                text: '中午了...',
+                position: 'center',
+                soundEffect: 'car'
             },
             {
                 character: null,
                 name: '',
-                text: '啪！',
-                position: 'center'
+                text: '好饿啊好饿啊',
+                position: 'center',
+                soundEffect: 'fifth'
             },
             {
-                character: null,
+                character: characters.baicai.image,
                 name: '',
-                text: '一个精致的便当盒突然出现在我面前。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '这是...？',
-                position: 'center'
+                text: '你给自己点了一碗牛肉丸面。虽然简单，但你多加了一个牛肉丸。听着周围看向你羡慕的目光和窃窃私语，你的嘴角不禁勾起。',
+                soundEffect: 'second'
             },
             {
                 character: characters.baicai.image,
-                name: '白菜',
-                text: '哼！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '昨天本小姐勉强收下了你的外套...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '作为白菜家的千金，怎么可能欠别人人情呢！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '所以！这是给你的回礼！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '我们家的厨师今天做多了...不吃的话...本小姐会很困扰的！',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '（打开便当盒）',
-                position: 'center'
-            },
-            {
-                character: null,
                 name: '',
-                text: '里面是色彩鲜艳的玉子烧、精致的饭团，还有各种配菜。',
-                position: 'center'
+                text: '说起来......白菜呢？你看着他呆萌的样子，内心一阵触动。',
+                soundEffect: 'enhen'
             },
             {
-                character: null,
+                character: characters.baicai.image,
                 name: '',
-                text: '每一样都摆放得像艺术品一样。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '看起来好好吃...那我就不客气了！',
-                position: 'center'
+                text: '......男人，也能这么美丽么？',
             }
         ],
         choices: [
             {
-                text: '【品尝便当】太好吃了！谢谢你，白菜！',
+                text: '【给白菜点一碗牛肉丸面】',
                 nextScene: 5
             },
             {
-                text: '【婉拒】不用了，我已经有便当了...',
-                nextScene: 8
+                text: '【白菜算个球，自己一个人吃】',
+                nextScene: 5
             }
         ]
     },
 
-    // === Chapter 5: True Feelings ===
+    // 5
     {
-        title: 'Chapter 5 - 心意传达',
-        background: 'https://images.unsplash.com/photo-1551218808-94e220e084d2?w=1920&q=80',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-love.mp3',
+        title: 'Chapter 3 - food2',
+        background: './images/food1.jpg',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
         scenes: [
             {
                 character: null,
-                name: '我',
-                text: '（品尝）唔...！',
-                position: 'center'
-            },
+                name: '白菜',
+                text: '你给我买的这是啥！你就给我吃这种东西么',
+                soundEffect: 'annoyed'
+            }
+        ],
+        nextScene: 6
+    },
+
+    // 6
+    {
+        title: 'Chapter 3 - food3',
+        background: './images/food2.jpg',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
+        scenes: [
             {
                 character: null,
-                name: '我',
-                text: '这个玉子烧...太好吃了！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
                 name: '白菜',
-                text: '是、是吗...？',
-                position: 'center'
+                text: '我不要吃这种东西，就不能带我去吃点好的吗？',
+                soundEffect: 'first'
             },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（小声）那就好...',
-                position: 'center'
-            },
+
             {
                 character: null,
-                name: '我',
-                text: '诶？你刚才说什么？',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
                 name: '白菜',
-                text: '没、没什么！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（脸颊微红）',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '不过...这真的是厨师做的吗？',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '总觉得...有种特别用心的感觉...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '！！！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '你、你这家伙...！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（慌张地站起来）当、当然是厨师做的啊！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '本小姐怎么可能会亲自下厨呢！',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '（温柔地笑）是这样啊...',
-                position: 'center'
-            },
+                text: '算了算了我不吃了，你自己吃吧。',
+            }
+        ],
+        nextScene: 7
+    },
+
+    // 7
+    {
+        title: 'Chapter 4 - night',
+        background: './images/bed.jpg',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
+        scenes: [
             {
                 character: null,
                 name: '',
-                text: '不过，我注意到她的手指上有个小小的创可贴。',
-                position: 'center'
+                text: '深夜...',
+                soundEffect: 'night'
             },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（捂住手指）',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '不、不许看！',
-                position: 'center'
-            },
+
             {
                 character: null,
-                name: '我',
-                text: '白菜...谢谢你。',
-                position: 'center'
-            },
+                name: '白菜',
+                text: '我的头好疼啊，我好难受。好像发烧了......',
+                soundEffect: 'bored'
+            }
+        ],
+        nextScene: 8
+    },
+    // 8
+    {
+        title: 'Chapter 4 - night',
+        background: './images/bedAngry.jpg',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
+        scenes: [
             {
                 character: null,
-                name: '我',
-                text: '这是我吃过最好吃的便当了。',
-                position: 'center'
+                name: '白菜',
+                text: '你盯着我干嘛，我不需要你的帮助！',
+                soundEffect: 'first'
+            },
+
+            {
+                character: null,
+                name: '',
+                text: '发烧的他看起来有种沁人心脾的艳丽。你打算：',
+                soundEffect: 'bored'
+            }
+        ],
+        choices: [
+            {
+                text: '【趁白菜迷迷糊糊的，给他敷个毛巾】',
+                nextScene: 9
             },
             {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（小声）...笨蛋...',
-                position: 'center'
+                text: '【不管他，继续玩刚刚没玩完的游戏】',
+                nextScene: 9
             }
         ]
     },
 
-    // === Final Chapter: Confession ===
+    // 9
     {
-        title: 'Final Chapter - 樱花树下',
-        background: 'https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1920&q=80',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-romantic.mp3',
+        title: 'Chapter 4 - night1',
+        background: './images/bedSmile1.jpg',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
         scenes: [
             {
                 character: null,
-                name: '',
-                text: '——放学后',
-                position: 'center'
+                name: '白菜',
+                text: '额头好温暖，感觉全身都放松下来了',
+                soundEffect: 'second'
             },
+
             {
                 character: null,
-                name: '',
-                text: '白菜突然给我发来了一条消息。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '【消息】白菜',
-                text: '"放学后来学校后院的樱花树下。\n本小姐有重要的话要对你说！"',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '（来到樱花树下）',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '樱花花瓣随风飘落。',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
                 name: '白菜',
-                text: '你、你来了...',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '嗯，你找我有什么事吗？',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '那个...我...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（握紧拳头）',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '虽然一开始我对你很傲慢...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '但是...你总是对我那么温柔...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '即使我用那种态度对你，你也从来没有生气过...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '我...我...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（深呼吸，鼓起勇气）',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '我喜欢你！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '虽、虽然我是大小姐，你是平民...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '但是！我不在乎那些！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '所以...你...你愿意和我交往吗？',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '樱花瓣在我们之间飘落。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '白菜...',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '我也喜欢你。',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '诶...？',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '真、真的吗...？',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（眼眶湿润）',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '嗯，从第一次见面开始，我就觉得你很特别。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '虽然嘴上说着"哼"，但其实很善良...',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '会偷偷做便当，会在意别人是否受伤...',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '这样的你，怎么可能不喜欢呢？',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '笨、笨蛋...！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（扑进我怀里）',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '太好了...真的太好了...',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '樱花花瓣在我们周围飞舞。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '见证着这份跨越身份的爱情。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '——True End——',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '系统',
-                text: '【白菜的好感度：MAX】\n\n恭喜达成 True End\n"傲娇大小姐的真心"',
-                position: 'center'
+                text: '好感度 +50',
+                soundEffect: 'second'
             }
         ],
-        choices: []
+        nextScene: 10
     },
 
-    // === Bad End 1 ===
+    // 10
     {
-        title: 'Bad End - 陌路人',
-        background: 'https://images.unsplash.com/photo-1428908728789-d2de25dbd4e2?w=1920&q=80',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-sadday.mp3',
+        title: 'Chapter 4 - night1',
+        background: './images/bedSmile.jpg',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
         scenes: [
             {
                 character: null,
-                name: '',
-                text: '我选择了默默离开。',
-                position: 'center'
+                name: '小猫咪男友白菜',
+                text: '居然是你帮我，我.....',
+                soundEffect: 'enhen'
             },
+
             {
                 character: null,
-                name: '',
-                text: '之后，白菜再也没有主动和我说过话。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '偶尔在走廊相遇时...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（冷淡地看了我一眼）',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '哼！',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '她快步走过，留下清冷的背影。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '也许...我们本就是两个世界的人。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '——Bad End——',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '系统',
-                text: '【达成 Bad End "陌路人"】\n\n也许...当时如果选择帮助她的话...\n\n（提示：尝试不同的选择探索其他结局）',
-                position: 'center'
+                name: '小猫咪男友白菜',
+                text: '对不起，看来之前是我误会你了'
             }
         ],
-        choices: []
+        nextScene: 11
     },
 
-    // === Normal End ===
+
+    // 11
     {
-        title: 'Normal End - 友情结局',
-        background: 'https://images.unsplash.com/photo-1551218808-94e220e084d2?w=1920&q=80',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-littleidea.mp3',
+        title: 'Chapter 5',
+        background: './images/cuteOnBed.jpg',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-sunny.mp3',
         scenes: [
             {
                 character: null,
-                name: '我',
-                text: '抱歉...我已经有便当了...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '诶...？',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（明显失望）',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '哼！算、算了！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '本小姐才不会强求别人呢！',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（转身准备离开）',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '我',
-                text: '不过...我们还是朋友吧？',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（停下脚步）',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '朋友...吗...',
-                position: 'center'
-            },
-            {
-                character: characters.baicai.image,
-                name: '白菜',
-                text: '（勉强笑了笑）嗯...当然了。',
-                position: 'center'
-            },
-            {
-                character: null,
                 name: '',
-                text: '之后，我们成为了朋友。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '虽然她还是会时不时地"哼"一声...',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '但总感觉...少了些什么。',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '',
-                text: '——Normal End——',
-                position: 'center'
-            },
-            {
-                character: null,
-                name: '系统',
-                text: '【达成 Normal End "珍贵的友情"】\n\n友情也是一种美好的关系...\n但似乎还有更好的结局？\n\n（提示：尝试接受白菜的好意）',
-                position: 'center'
+                text: '恭喜你！\n成功攻略了傲娇男友白菜!',
+                soundEffect: 'applause'
             }
-        ],
-        choices: []
-    }
+        ]
+    }  
 ];
 
 // 启动游戏
@@ -1137,8 +468,13 @@ function showDialog() {
                 // choices 为空数组，表示结局，显示结束画面
                 showEnding();
             }
+        } else if (scene.nextScene !== undefined) {
+            // 如果有 nextScene 属性，跳转到指定场景
+            setTimeout(() => {
+                loadScene(scene.nextScene);
+            }, 1500);
         } else {
-            // 没有选项，进入下一场景
+            // 没有选项，也没有指定跳转，进入下一场景
             setTimeout(() => {
                 loadScene(gameState.currentScene + 1);
             }, 1500);
@@ -1163,6 +499,11 @@ function showDialog() {
 
     // 打字机效果
     typeWriter(textElement, dialog.text, 50);
+
+    // 播放音效（如果有）
+    if (dialog.soundEffect) {
+        playSoundEffect(dialog.soundEffect);
+    }
 
     // 设置角色立绘
     if (dialog.character) {
@@ -1409,6 +750,6 @@ document.addEventListener('keydown', (e) => {
 });
 
 // 初始化
-console.log('%c傲娇大小姐白菜 - Galgame', 'color: #32CD32; font-size: 24px; font-weight: bold;');
-console.log('%c准备好体验一段甜蜜的恋爱故事了吗？', 'color: #98FB98; font-size: 14px;');
+console.log('%c傲娇男友白菜 - Galgame', 'color: #32CD32; font-size: 24px; font-weight: bold;');
+console.log('%c准备好体验与虚拟傲娇男友的日常了吗？', 'color: #98FB98; font-size: 14px;');
 console.log('%cBGM: Bensound (https://www.bensound.com)', 'color: #FFD700; font-size: 12px;');
