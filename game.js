@@ -885,7 +885,8 @@ const gameScript = [
                 text: '【白菜的好感度：MAX】\n\n恭喜达成 True End\n"傲娇大小姐的真心"',
                 position: 'center'
             }
-        ]
+        ],
+        choices: []
     },
 
     // === Bad End 1 ===
@@ -948,7 +949,8 @@ const gameScript = [
                 text: '【达成 Bad End "陌路人"】\n\n也许...当时如果选择帮助她的话...\n\n（提示：尝试不同的选择探索其他结局）',
                 position: 'center'
             }
-        ]
+        ],
+        choices: []
     },
 
     // === Normal End ===
@@ -1047,7 +1049,8 @@ const gameScript = [
                 text: '【达成 Normal End "珍贵的友情"】\n\n友情也是一种美好的关系...\n但似乎还有更好的结局？\n\n（提示：尝试接受白菜的好意）',
                 position: 'center'
             }
-        ]
+        ],
+        choices: []
     }
 ];
 
@@ -1127,8 +1130,13 @@ function showDialog() {
 
     if (!dialog) {
         // 对话结束，检查是否有选项
-        if (scene.choices) {
-            showChoices(scene.choices);
+        if (scene.choices !== undefined) {
+            if (scene.choices.length > 0) {
+                showChoices(scene.choices);
+            } else {
+                // choices 为空数组，表示结局，显示结束画面
+                showEnding();
+            }
         } else {
             // 没有选项，进入下一场景
             setTimeout(() => {
@@ -1141,6 +1149,9 @@ function showDialog() {
     const nameElement = document.getElementById('characterName');
     const textElement = document.getElementById('dialogText');
     const dialogBox = document.getElementById('dialogBox');
+
+    // 暂时禁用点击事件，防止重复触发
+    dialogBox.onclick = null;
 
     // 设置角色名颜色
     nameElement.textContent = dialog.name;
@@ -1162,22 +1173,37 @@ function showDialog() {
         charactersLayer.innerHTML = '';
     }
 
-    // 点击继续
-    dialogBox.onclick = () => {
-        if (textElement.dataset.typing === 'true') {
-            // 如果正在打字，直接显示全部文本
-            textElement.textContent = dialog.text;
-            textElement.dataset.typing = 'false';
-        } else {
-            // 否则进入下一段对话
-            gameState.currentDialog++;
-            showDialog();
-        }
-    };
+    // 延迟设置点击事件，确保上一个事件已清除
+    setTimeout(() => {
+        dialogBox.onclick = () => {
+            if (textElement.dataset.typing === 'true') {
+                // 如果正在打字，直接显示全部文本
+                textElement.textContent = dialog.text;
+                textElement.dataset.typing = 'false';
+                // 清除打字机的timeout
+                if (currentTypeWriterTimeout) {
+                    clearTimeout(currentTypeWriterTimeout);
+                    currentTypeWriterTimeout = null;
+                }
+            } else {
+                // 否则进入下一段对话
+                gameState.currentDialog++;
+                showDialog();
+            }
+        };
+    }, 50);
 }
 
 // 打字机效果
+let currentTypeWriterTimeout = null;
+
 function typeWriter(element, text, speed) {
+    // 清除之前的打字机效果
+    if (currentTypeWriterTimeout) {
+        clearTimeout(currentTypeWriterTimeout);
+        currentTypeWriterTimeout = null;
+    }
+
     element.textContent = '';
     element.dataset.typing = 'true';
     let i = 0;
@@ -1186,9 +1212,10 @@ function typeWriter(element, text, speed) {
         if (i < text.length) {
             element.textContent += text.charAt(i);
             i++;
-            setTimeout(type, speed);
+            currentTypeWriterTimeout = setTimeout(type, speed);
         } else {
             element.dataset.typing = 'false';
+            currentTypeWriterTimeout = null;
         }
     }
 
