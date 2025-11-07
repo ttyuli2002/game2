@@ -185,7 +185,7 @@ const gameScript = [
     {
         title: 'Chapter 3 - food',
         background: './images/foodScene.jpg',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-sweetday.mp3',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',
         scenes: [
             {
                 character: null,
@@ -235,7 +235,7 @@ const gameScript = [
     {
         title: 'Chapter 3 - food2',
         background: './images/food1.jpg',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-sweetday.mp3',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',
         scenes: [
             {
                 character: null,
@@ -251,7 +251,7 @@ const gameScript = [
     {
         title: 'Chapter 3 - food3',
         background: './images/food2.jpg',
-        bgm: 'https://www.bensound.com/bensound-music/bensound-sweetday.mp3',
+        bgm: 'https://www.bensound.com/bensound-music/bensound-tenderness.mp3',
         scenes: [
             {
                 character: null,
