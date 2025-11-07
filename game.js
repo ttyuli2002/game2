@@ -409,14 +409,28 @@ function loadScene(sceneIndex) {
 
     const scene = gameScript[sceneIndex];
 
-    // 设置背景
+    // 设置背景（自动比例适配）
     const background = document.getElementById('background');
     if (scene.background) {
         background.style.opacity = '0';
-        setTimeout(() => {
+
+        const img = new Image();
+        img.src = scene.background;
+        img.onload = () => {
+            const screenRatio = window.innerWidth / window.innerHeight;
+            const imageRatio = img.width / img.height;
+
+            // 判断图片比例：横图 → cover，竖图 → contain
+            if (imageRatio >= screenRatio) {
+                background.style.backgroundSize = 'cover';
+            } else {
+                background.style.backgroundSize = 'contain';
+            }
+
+            background.style.backgroundColor = 'black';
             background.style.backgroundImage = `url(${scene.background})`;
             background.style.opacity = '1';
-        }, 300);
+        };
     }
 
     // 播放背景音乐
